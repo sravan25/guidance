@@ -1,6 +1,12 @@
 <p> {{todayDate}}</p>
+
+<p *ngIf="dataFromChild !== undefined">{{dataFromChild.values}} == {{dataFromChild.time}}
+</p>
+
+<app-output-capture ></app-output-capture>
 <div class="form-list">
-  
+
+
 <!--
 <input
     type="text"
@@ -9,84 +15,89 @@
  /> 
  {{inputContent}}
  -->
- <div>
- <input
-    type="text"
-    id="break"
-    class="form-control"
-    [(ngModel)] = "breakfast"
-    placeholder="Enter breakfast"
-    [ngStyle]="{borderColor:errBgColor}"
+      <div>
+      <input
+         type="text"
+         id="break"
+         class="form-control"
+         name = "breakfast"
+         [(ngModel)] = "breakfast"
+         placeholder="Enter item"
+         [ngStyle]="{borderColor:errBgColor}"
+         (blur) = "updateDiet($event)"
+         
+      />
+      <input 
+         type="text"
+         id="btime"
+         class="form-control"
+         name="btime"
+         [(ngModel)] = "btime"
+         placeholder="time"
+         (blur) = "updateDiet($event)"
+      />
+      </div>
+      <div>
+      <input
+         type="text"
+         id="lunch"
+         class="form-control"
+         [(ngModel)] = "lunch"
+         placeholder = "Enter lunch items"
+      />
+      <input
+         type="text"
+         id="ltime"
+         class="form-control"
+         [(ngModel)] = "ltime"
+         placeholder="time"
+      />
+      </div>
 
- />
- <input 
-   type="text"
-   id="btime"
-   class="form-control"
-   [(ngModel)] = "btime"
-   placeholder="time"
- />
-</div>
-<div>
- <input
-    type="text"
-    id="lunch"
-    class="form-control"
-    [(ngModel)] = "lunch"
-    placeholder = "Enter lunch items"
- />
- <input
-    type="text"
-    id="ltime"
-    class="form-control"
-    [(ngModel)] = "ltime"
-    placeholder="time"
- />
- </div>
-
- <div>
- <input
-    type="text"
-    id="dinner"
-    class="form-control"
-    [(ngModel)] = "dinner"
-    placeholder="Enter dinner items"
- />
- <input
- type="text"
- id="dtime"
- class="form-control"
- [(ngModel)] = "dtime"
- placeholder="time"
-/> 
-</div>
-<div>
-   <input
+      <div>
+      <input
+         type="text"
+         id="dinner"
+         class="form-control"
+         [(ngModel)] = "dinner"
+         placeholder="Enter dinner items"
+      />
+      <input
       type="text"
-      id="snacks"
+      id="dtime"
       class="form-control"
-      [(ngModel)] = "snacks"
-      placeholder="Enter snacks"
-   />
-   <input
-      type="text"
-      id="snacks"
-      class="form-control"
-      [(ngModel)] = "stime"
+      [(ngModel)] = "dtime"
       placeholder="time"
-   />
-</div>
+      /> 
+      </div>
+      <div>
+         <input
+            type="text"
+            id="snacks"
+            class="form-control"
+            [(ngModel)] = "snacks"
+            placeholder="Enter snacks"
+         />
+         <input
+            type="text"
+            id="snacks"
+            class="form-control"
+            [(ngModel)] = "stime"
+            placeholder="time"
+         />
+      </div>
 
- <button [disabled] = "disable" (click) = "onSubmit($event)" [ngClass] = "{active:disable===false}"> 
-     Enter
-</button>
+      <button [disabled] = "disable" (click) = "onSubmit($event)" [ngClass] = "{active:disable===false}"> 
+         Enter
+      </button>
 
-</div>
-<div>
-   <p> List of Items You had</p>
-   <div>
-
-      
-   </div>
+      </div>
+      <div>
+           <p> List of Items You had</p>
+         <app-form-list 
+            *ngIf="items !== undefined"
+            [itemList] = "items" 
+            (modifiedItem) = "getItem($event)">
+         </app-form-list>
 
 </div>

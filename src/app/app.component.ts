@@ -4,15 +4,15 @@ import { Component } from '@angular/core';
   selector: 'app-root',
   templateUrl: './app.component.html',
  // template:`<div> Some conentent</div>`,
-  //styleUrls: ['./app.component.css'],
-  styles:[`
+  styleUrls: ['./app.component.css'],
+  /*styles:[`
     {
 
 
     }
   
   
-  `]
+  `]*/
 })
 export class AppComponent {
   title:string = 'guidance';
@@ -23,11 +23,7 @@ export class AppComponent {
 
   }
 
-  xyz() {
-
-
-  }
-
+  
   onpdateField(){
 
     

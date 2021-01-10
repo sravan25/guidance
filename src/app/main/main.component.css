@@ -16,7 +16,6 @@
     border-radius: 4px;
     box-shadow: 4px 4px 2px 2px rgb(124, 105, 105),-4px -4px 2px 2px sandybrown;
     align-items: left;
-    
 }
 
 input[type=text] {
@@ -28,7 +27,6 @@ input[type=text] {
 }
 
 .active {
-
     background-color: blue;
     color:white;
     height:auto;

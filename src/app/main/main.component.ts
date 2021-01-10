@@ -9,7 +9,7 @@ export class MainComponent implements OnInit {
 
   todayDate:Date = new Date();
   timer:Object = null;
-  disable:boolean = true;
+  disable:boolean = false;
   inputContent:any = "";
   time:any = "";
   lunch:string="";
@@ -22,23 +22,63 @@ export class MainComponent implements OnInit {
   stime:string="";
   errBgColor:string=""
   error:Object = {};
+  items:Object;
+  dataFromChild:Object;
   constructor() { 
 
-    setTimeout(() => {
+   
+  }
+
+
+  updateDiet(event:Event) {
+    let inputElement = (<HTMLInputElement>event.target)
+    
+    let value = inputElement.value;
+    let name = inputElement.name;
+
+    this.items[name] = value;
+
+    if(value==="") {
+      this.disable = true;
+    } else {
       this.disable = false;
-    },2000)
+    }
+    console.log(this.items);
   }
-
-
-  onUpdateDiet(event:Event) {
-    this.inputContent = (<HTMLInputElement>event.target).value;
-    console.log(this.inputContent);
+  
+  getItem(event:Event) {
+    this.dataFromChild = event;
+  //  this.dataFromChild = {...event}
+  
   }
+ 
 
   onSubmit(event:Event) {
     console.log("breakfast = ",this.breakfast);
-    if(this.breakfast === "") {
+   
+    if(this.breakfast === "" || this.btime === "" || this.lunch === "" || this.ltime === "" || this.dinner === "" || this.dtime === "") {
       this.errBgColor = "red"
+     
+    } else {
+      
+      this.items = {
+        "breakfast":{
+          values:this.breakfast,
+          time:this.btime
+        },
+        "lunch":{
+          values:this.lunch,
+          time:this.ltime
+        },
+        "dinner":{
+          values:this.dinner,
+          time:this.dtime
+        },
+        "snacks":{
+          values:this.snacks,
+          time:this.stime
+        }
+      }
     }
   }
 

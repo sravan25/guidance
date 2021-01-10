@@ -1,0 +1,9 @@
+.item-content {
+
+    cursor: pointer;
+    height:auto;
+    font-size: 1.1rem;
+    background-color:ghostwhite;
+    width:auto;
+    padding:10px;
+}
