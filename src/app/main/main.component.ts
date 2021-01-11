@@ -1,11 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,ViewChild,AfterViewInit } from '@angular/core';
+import { FormListComponent } from '../form-list/form-list.component';
+import { OutputCaptureComponent } from '../output-capture/output-capture.component';
 
 @Component({
   selector: 'app-main',
   templateUrl: './main.component.html',
   styleUrls: ['./main.component.css']
 })
-export class MainComponent implements OnInit {
+export class MainComponent implements OnInit,AfterViewInit  {
 
   todayDate:Date = new Date();
   timer:Object = null;
@@ -24,10 +26,19 @@ export class MainComponent implements OnInit {
   error:Object = {};
   items:Object;
   dataFromChild:Object;
+
+  @ViewChild(OutputCaptureComponent, {static: true}) outputCapture:OutputCaptureComponent;
+
+  
   constructor() { 
 
    
   }
+
+  ngAfterViewInit() {
+    console.log('Values on ngAfterViewInit():');
+    console.log("primaryColorSample:", this.outputCapture.getCapture());
+  }  
 
 
   updateDiet(event:Event) {
@@ -53,8 +64,9 @@ export class MainComponent implements OnInit {
   }
  
 
-  onSubmit(event:Event) {
-    console.log("breakfast = ",this.breakfast);
+  onSubmit(inputRef:any) {
+
+    console.log("breakfast = ",inputRef);
    
     if(this.breakfast === "" || this.btime === "" || this.lunch === "" || this.ltime === "" || this.dinner === "" || this.dtime === "") {
       this.errBgColor = "red"

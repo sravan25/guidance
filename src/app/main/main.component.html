@@ -3,10 +3,8 @@
 <p *ngIf="dataFromChild !== undefined">{{dataFromChild.values}} == {{dataFromChild.time}}
 </p>
 
-<app-output-capture ></app-output-capture>
+<div class="main-content">
 <div class="form-list">
-
-
 <!--
 <input
     type="text"
@@ -25,7 +23,7 @@
          placeholder="Enter item"
          [ngStyle]="{borderColor:errBgColor}"
          (blur) = "updateDiet($event)"
-         
+         #breakfastref
       />
       <input 
          type="text"
@@ -87,17 +85,22 @@
          />
       </div>
 
-      <button [disabled] = "disable" (click) = "onSubmit($event)" [ngClass] = "{active:disable===false}"> 
+      <button [disabled] = "disable" (click) = "onSubmit(breakfastref)" [ngClass] = "{active:disable===false}"> 
          Enter
       </button>
-
-      </div>
-      <div>
-           <p> List of Items You had</p>
+   </div>
+      
+      <div class="list-content">
          <app-form-list 
             *ngIf="items !== undefined"
             [itemList] = "items" 
             (modifiedItem) = "getItem($event)">
          </app-form-list>
 
-</div>
+      
+
+      </div>
+      <div class="output-content">
+
+         <app-output-capture  #outputCapture></app-output-capture>
+      </div>

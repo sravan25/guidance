@@ -7,7 +7,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class OutputCaptureComponent implements OnInit {
 
+  output:String = "Hi world";
+
   constructor() { }
+
+  getCapture() {
+
+    console.log(" output ==",this.output);
+  }
 
   ngOnInit(): void {
   }

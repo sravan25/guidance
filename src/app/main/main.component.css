@@ -1,12 +1,19 @@
+.main-content {
+    display:flex;
+    position: relative;
+    top:10px;
+    width:auto;
+    padding:20px;
+    margin:auto;
+    justify-content: space-around;
+
+
+}
 .form-list {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
-    position: relative;
-    top:10px;
-    margin:auto;
-    width:600px;
     background-color: floralwhite;
     border:1px solid brown;
     height:auto;
@@ -16,6 +23,14 @@
     border-radius: 4px;
     box-shadow: 4px 4px 2px 2px rgb(124, 105, 105),-4px -4px 2px 2px sandybrown;
     align-items: left;
+}
+
+.list-content {
+    border:1px solid burlywood;
+    border-radius: 4px;
+    padding:10px;
+    min-width: 200px;
+    max-width:500px;
 }
 
 input[type=text] {
@@ -34,4 +49,10 @@ input[type=text] {
     padding:10px 20px;
     font-size:1.3rem;
     cursor:pointer
+}
+
+.ouput-content {
+    border:1px solid block;
+    border-radius: 4px;
+    min-width:250px;
 }
