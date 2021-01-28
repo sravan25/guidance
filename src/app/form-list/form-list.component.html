@@ -1,5 +1,19 @@
-<div *ngFor="let item of items;let i = index">
-    <div (click)="onEditItem(itemList[item])" class="item-content">
-     {{i}} - {{itemList[item].values}} -  {{itemList[item].time}}
+<div *ngFor="let item of itemList;let i = index">
+    <div (click)="onEditItem(item)" class="item-content"
+    [ngSwitch]="item.name">
+        <div *ngSwitchCase="'lunch'" style="background-color:bisque;height:50px;" class="item-text">
+        {{item.name}} - {{item.value}} -  {{item.time}}
+        </div>
+        <div *ngSwitchCase="'bfast'" style="background-color:bisque;height:50px;" class="item-text">
+            {{item.name}} - {{item.value}} -  {{item.time}}
+        </div>
+       
+        <div *ngSwitchCase="'dinner'" style="background-color:beige;height:50px;" class="item-text">
+            {{item.name}} - {{item.value}} -  {{item.time}}
+        </div>
+     
+        <div *ngSwitchCase="'snacks'" style="background-color:coral;height:50px;" class="item-text">
+            {{item.name}} - {{item.value}} -  {{item.time}}
+        </div>
     </div>
 </div>

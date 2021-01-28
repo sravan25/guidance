@@ -1,106 +1,15 @@
 <p> {{todayDate}}</p>
-
-<p *ngIf="dataFromChild !== undefined">{{dataFromChild.values}} == {{dataFromChild.time}}
-</p>
-
+<p *ngIf="dataFromChild !== undefined">{{dataFromChild.values}} == {{dataFromChild.time}}</p>
 <div class="main-content">
-<div class="form-list">
-<!--
-<input
-    type="text"
-    class="form-control"
-    (input) = "onUpdateDiet($event)"
- /> 
- {{inputContent}}
- -->
-      <div>
-      <input
-         type="text"
-         id="break"
-         class="form-control"
-         name = "breakfast"
-         [(ngModel)] = "breakfast"
-         placeholder="Enter item"
-         [ngStyle]="{borderColor:errBgColor}"
-         (blur) = "updateDiet($event)"
-         #breakfastref
-      />
-      <input 
-         type="text"
-         id="btime"
-         class="form-control"
-         name="btime"
-         [(ngModel)] = "btime"
-         placeholder="time"
-         (blur) = "updateDiet($event)"
-      />
-      </div>
-      <div>
-      <input
-         type="text"
-         id="lunch"
-         class="form-control"
-         [(ngModel)] = "lunch"
-         placeholder = "Enter lunch items"
-      />
-      <input
-         type="text"
-         id="ltime"
-         class="form-control"
-         [(ngModel)] = "ltime"
-         placeholder="time"
-      />
-      </div>
-
-      <div>
-      <input
-         type="text"
-         id="dinner"
-         class="form-control"
-         [(ngModel)] = "dinner"
-         placeholder="Enter dinner items"
-      />
-      <input
-      type="text"
-      id="dtime"
-      class="form-control"
-      [(ngModel)] = "dtime"
-      placeholder="time"
-      /> 
-      </div>
-      <div>
-         <input
-            type="text"
-            id="snacks"
-            class="form-control"
-            [(ngModel)] = "snacks"
-            placeholder="Enter snacks"
-         />
-         <input
-            type="text"
-            id="snacks"
-            class="form-control"
-            [(ngModel)] = "stime"
-            placeholder="time"
-         />
-      </div>
-
-      <button [disabled] = "disable" (click) = "onSubmit(breakfastref)" [ngClass] = "{active:disable===false}"> 
-         Enter
-      </button>
+      <app-form-element (sendItems)="getItemsFromFormComponent($event)" *appCustomStruct="disable"></app-form-element>
+   <div class="list-content">
+      <app-form-list 
+         *ngIf="items !== undefined"
+         [itemList] = "items" 
+         (modifiedItem) = "getItem($event)">
+      </app-form-list>
    </div>
-      
-      <div class="list-content">
-         <app-form-list 
-            *ngIf="items !== undefined"
-            [itemList] = "items" 
-            (modifiedItem) = "getItem($event)">
-         </app-form-list>
-
-      
-
-      </div>
-      <div class="output-content">
-
-         <app-output-capture  #outputCapture></app-output-capture>
-      </div>
+   <div class="output-content">
+      <app-output-capture  #outputCapture></app-output-capture>
+   </div>
+</div>

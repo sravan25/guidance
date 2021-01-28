@@ -11,27 +11,14 @@ export class MainComponent implements OnInit,AfterViewInit  {
 
   todayDate:Date = new Date();
   timer:Object = null;
-  disable:boolean = false;
   inputContent:any = "";
-  time:any = "";
-  lunch:string="";
-  dinner:string="";
-  snacks:string="";
-  dtime:string="";
-  ltime:string="";
-  btime:string="";
-  breakfast:string="";
-  stime:string="";
-  errBgColor:string=""
-  error:Object = {};
-  items:Object;
   dataFromChild:Object;
-
+  items:Object;
+  disable:boolean = false;
   @ViewChild(OutputCaptureComponent, {static: true}) outputCapture:OutputCaptureComponent;
 
   
   constructor() { 
-
    
   }
 
@@ -40,59 +27,19 @@ export class MainComponent implements OnInit,AfterViewInit  {
     console.log("primaryColorSample:", this.outputCapture.getCapture());
   }  
 
-
-  updateDiet(event:Event) {
-    let inputElement = (<HTMLInputElement>event.target)
-    
-    let value = inputElement.value;
-    let name = inputElement.name;
-
-    this.items[name] = value;
-
-    if(value==="") {
-      this.disable = true;
-    } else {
-      this.disable = false;
-    }
-    console.log(this.items);
-  }
-  
   getItem(event:Event) {
     this.dataFromChild = event;
   //  this.dataFromChild = {...event}
   
   }
  
-
-  onSubmit(inputRef:any) {
-
-    console.log("breakfast = ",inputRef);
+  getItemsFromFormComponent(event:Event) {
    
-    if(this.breakfast === "" || this.btime === "" || this.lunch === "" || this.ltime === "" || this.dinner === "" || this.dtime === "") {
-      this.errBgColor = "red"
-     
-    } else {
-      
-      this.items = {
-        "breakfast":{
-          values:this.breakfast,
-          time:this.btime
-        },
-        "lunch":{
-          values:this.lunch,
-          time:this.ltime
-        },
-        "dinner":{
-          values:this.dinner,
-          time:this.dtime
-        },
-        "snacks":{
-          values:this.snacks,
-          time:this.stime
-        }
-      }
-    }
+    this.items =event;
+    console.log("items in maincomonent === ",this.items);
   }
+  
+  
 
 lang = 'it-IT'
 voiceIndex = 1

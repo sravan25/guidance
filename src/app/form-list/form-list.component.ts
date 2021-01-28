@@ -1,27 +1,37 @@
-import { Component, Input, OnInit, Output,EventEmitter } from '@angular/core';
-
+import { Component, Input, OnInit, Output,EventEmitter, OnChanges } from '@angular/core';
+import {CommonService} from '../../common.service'
+import {CommunicateService} from '../communicate.service'
 @Component({
   selector: 'app-form-list',
   templateUrl: './form-list.component.html',
   styleUrls: ['./form-list.component.css']
 })
-export class FormListComponent implements OnInit {
-  @Input('itemList') itemList:Object;
-  @Output('modifiedItem') editItem = new EventEmitter<Object>();
-  items:String[];
-  constructor() { 
-
+export class FormListComponent implements OnInit,OnChanges {
+  @Input('itemList') itemList:Object[] = [];
+  
+  
+  prevItems:Object[] =[];
+  items:Object[];
+  constructor(private CommonService:CommonService, private commuteService:CommunicateService) { 
   }
 
   onEditItem(item:Object) {
-    console.log("item = =",item);
-    this.editItem.emit(item);
+    this.commuteService.raiseEvent(item);
   }
 
   ngOnInit(): void {
-    this.items = [];
-    Object.keys(this.itemList).forEach(item => {
-      this.items.push(item)
-    })
+    console.log(" ngOnit == form list");
+  }
+
+ ngOnChanges(): void {
+  this.CommonService.logInfo("formListComponent","ngOnchange");
+  }
+
+  ngDoCheck() {
+    console.log(" ngDocheck --");
+    if(this.itemList.length == 0 || (this.itemList.length !== this.prevItems.length)) {
+     
+      this.prevItems = [...this.itemList];
+    }
   }
 }

@@ -1,0 +1,28 @@
+<div>
+<select [(ngModel)] = "itemName" (change)="selectName()">
+    <option value="lunch"> Lunch</option>
+    <option value="bfast"> Breakfast</option>
+    <option value="snacks"> Snacks</option>
+    <option value="dinner"> Dinner</option>
+</select>
+
+<input
+       type="text"
+       class="form-control"
+       [(ngModel)] = "name"
+       placeholder="Enter item"
+       [ngStyle]="{borderColor:errBgColor}"
+       #breakfastref
+    />
+    <input 
+       type="text"
+       class="form-control"
+       name="btime"
+       [(ngModel)] = "time"
+       placeholder="time"
+       (blur) = "updateDiet($event)"
+    />
+    <button [disabled] = "disable" (click) = "onSubmit()" [ngClass] = "{active:disable===false}"> 
+      ADD
+   </button>
+</div>

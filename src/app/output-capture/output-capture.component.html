@@ -1,1 +1,20 @@
-<p>Child Component under main component</p>
+<p aria-readonly="true">
+    This component got subscribed to service by using subscribe method
+</p>
+<div appApplyColor [defaultColor]="'orange'" *ngIf="itemObject !== undefined"> 
+   <input
+    type="text"
+    value={{itemObject.name}}
+    />
+    <input 
+     typwe="text"
+     value ={{itemObject.value}}
+     />
+     <input
+        type="text"
+        value={{itemObject.time}}
+    />
+    <Button>
+        Edit
+    </Button>
+</div>
