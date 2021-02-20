@@ -1,4 +1,5 @@
 import { Component, OnInit,Output,EventEmitter } from '@angular/core';
+import { CommunicateService } from '../communicate.service';
 
 @Component({
   selector: 'app-form-element',
@@ -16,7 +17,7 @@ export class FormElementComponent implements OnInit {
   items:Object[] =[];
   @Output('sendItems') itemsToExport = new EventEmitter<Object>()
 
-  constructor() { }
+  constructor(private commService:CommunicateService) { }
 
   ngOnInit(): void {
   }
@@ -38,8 +39,13 @@ export class FormElementComponent implements OnInit {
       time:this.time
     })
     console.log(" items -- ",this.items);
+    this.commService.addData({
+      name:this.itemName,
+      value:this.name,
+      time:this.time
+    })
     this.itemsToExport.emit(this.items)
-   
+     
   }
 
 }

@@ -1,7 +1,7 @@
 <p aria-readonly="true">
-    This component got subscribed to service by using subscribe method
+    This component got subscribed to service by using subscribe method == {{date}}
 </p>
-<div appApplyColor [defaultColor]="'orange'" *ngIf="itemObject !== undefined"> 
+<div appApplyColor [defaultColor]="'white'" *ngIf="itemObject !== undefined" style="width:auto"> 
    <input
     type="text"
     value={{itemObject.name}}
@@ -14,7 +14,26 @@
         type="text"
         value={{itemObject.time}}
     />
-    <Button>
+    <button>
         Edit
-    </Button>
+    </button>
+</div>
+<div *ngFor="let item of itemd" >
+    <div appApplyColor [defaultColor]="'white'"  style="width:auto"> 
+        <input
+        type="text"
+        value={{item.name}}
+        />
+        <input 
+        typwe="text"
+        value ={{item.value}}
+        />
+        <input
+            type="text"
+            value={{item.time}}
+        />
+        <button>
+            Edit
+        </button>
+    </div>
 </div>
