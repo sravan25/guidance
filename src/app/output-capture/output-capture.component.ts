@@ -1,6 +1,8 @@
 import { Component, OnInit,ViewChild,ViewEncapsulation } from '@angular/core';
 import {CommunicateService} from '../communicate.service';
 import {CommonService} from '../../common.service';
+import { ActivatedRoute,Params } from '@angular/router';
+import { Subscription } from 'rxjs';
 @Component({
   selector: 'app-output-capture',
   templateUrl: './output-capture.component.html',
@@ -11,12 +13,18 @@ export class OutputCaptureComponent implements OnInit {
 
   output:String = "Hi world";
   itemObject:Object;
+  paramSub:Subscription;
+  item:Object= {name:"",values:"",time:""};
+  date:any = new Date().getTime();
+  itemd:Object[] = [];
 
-  constructor(private commService:CommunicateService,private commonService:CommonService) {
+  constructor(private commService:CommunicateService,
+    private commonService:CommonService,
+    private route:ActivatedRoute) {
 
     this.commService.receiveObject.subscribe((param:Object)=>{
       this.itemObject = {...param}
-      console.log("dfdsf",this.itemObject);
+      console.log("dfdsf",this.itemObject,new Date().getTime());
     
     });
    }
@@ -27,11 +35,27 @@ export class OutputCaptureComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    
+    console.log("routing params = ",this.route.snapshot.params['name'])
+    //this.route.snapshot.queryParams;
+    //this.route.snapshot.fragement
+    this.paramSub = this.route.params.subscribe((params:Params) =>{
+     
+      if(params["name"] === "all") {
+          this.itemd = this.commService.getItems();
+      } else {
+        this.itemObject =  this.commService.getItem();
+      }
+     
+    });
+
+    this.route.queryParams.subscribe((queryParams:Params) =>{
+
+    })
   }
 
   ngDoCheck() {
   //  this.commonService.logInfo("outputCapture log",this.itemObject);
+  
   }
 
 }

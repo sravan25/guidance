@@ -5,7 +5,9 @@ import { Injectable } from '@angular/core';
 })
 export class CommonService {
 
-  constructor() { }
+  constructor() {
+    console.log("Constructor == CommonService");
+   }
 
   logInfo(className,msg) {
     console.log(className,msg)

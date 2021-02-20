@@ -1,5 +1,4 @@
 .item-content {
-
     cursor: pointer;
     height:auto;
     font-size: 1.1rem;
@@ -8,7 +7,7 @@
     padding:10px;
     text-align: center;
     vertical-align: middle;
-    
+    box-shadow: 2px 2px 1px 1px black;
 }
 
 .item-text {
