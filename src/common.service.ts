@@ -7,15 +7,15 @@ export class CommonService {
 
   constructor() { }
 
-  logInfo(className,msg) {
-    console.log(className,msg)
+  logInfo(className, msg): void {
+    console.log(className, msg);
   }
-  logWarn(className,msg) {
-    console.warn(className,msg)
+  logWarn(className, msg): void{
+    console.warn(className, msg);
   }
 
-  logError(className,err) {
+  logError(className, err): void {
 
-    console.error(className,err)
+    console.error(className, err);
   }
 }

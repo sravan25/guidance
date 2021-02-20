@@ -14,6 +14,8 @@ import { ApplyColorDirective } from './apply-color.directive';
 import { FormElementComponent } from './form-element/form-element.component';
 import { CustomStructDirective } from './custom-struct.directive';
 import { CommonService } from 'src/common.service';
+import { LoginComponent } from './login/login.component';
+import { RegisterComponent } from './register/register.component';
 
 const appRoutes:Routes = [{
   path:"items",component:OutputCaptureComponent
@@ -29,7 +31,9 @@ const appRoutes:Routes = [{
     OutputCaptureComponent,
     ApplyColorDirective,
     FormElementComponent,
-    CustomStructDirective
+    CustomStructDirective,
+    LoginComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
