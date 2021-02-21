@@ -1,5 +1,6 @@
 import { ThrowStmt } from '@angular/compiler';
 import { EventEmitter, Injectable } from '@angular/core';
+import { Subject } from 'rxjs';
 
 
 @Injectable({
@@ -7,8 +8,10 @@ import { EventEmitter, Injectable } from '@angular/core';
 })
 export class CommunicateService {
   receiveObject:EventEmitter<Object>;
+  // @ts-ignore
+  subObject: Subject<boolean> = new Subject<boolean>();
   itemData:Object;
-  itemListData:Object[] =[];
+  itemListData: Object[] = [];
   constructor() { 
     this.receiveObject = new EventEmitter<Object>();
 
@@ -16,9 +19,9 @@ export class CommunicateService {
 
   raiseEvent(itemData:Object):void {
     this.itemData = itemData;
-    console.log(" Service data == ",this.itemData);
-   
+    console.log(" Service data == ", this.itemData);
     this.receiveObject.emit(itemData);
+    this.subObject.next(true);
   }
 
   addData(itemData:Object):void {

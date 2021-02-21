@@ -1,6 +1,53 @@
-<div>
-    <input type="text" ngModel="username"placeholder="Enter userName"/>
-</div>
-<div>
-    <input type="password" ngModel="password" placeholder="Enter Password"/>
-</div>
+<DIV>
+    <form (ngSubmit)="onSubmit()" #f="ngForm">
+      <div
+            ngModelGroup="userData"
+            #userData="ngModelGroup"
+        >
+            <div>
+                <input type="text"
+                       placeholder="Enter userName"
+                       ngModel
+                       name="userName"
+                       required
+                       userName
+                       #userName="ngModel"
+                />
+            </div>
+            <div *ngIf="!userName.valid && userName.touched"
+                 style="text-align: left;font-size:0.8rem;color:red;padding:20px">
+                User Name required
+            </div>
+            <div>
+                <input type="password"  placeholder="Enter Password"
+                       ngModel
+                       name="userPassword" userPassword required/>
+            </div>
+            <div>
+                <label>
+                    <input
+                        type="radio"
+                        name="gender"
+                        ngModel
+                        [value]="gender"/> Male
+                </label>
+                <label>
+                    <input
+                            type="radio"
+                            name="gender"
+                            ngModel [value]="gender"/> Female
+                </label>
+            </div>
+       <div>
+         <button type="submit" class="button" value="Login" ngModel >Login</button>
+       </div>
+       <div *ngIf="!userData.valid && userData.touched" style="text-align: left;font-size:0.8rem;color:red;padding:20px">
+                user Data invalid
+            </div>
+      </div>
+    </form>
+    <div>
+        <a [routerLink]="['rigister']">Register </a>
+    </div>
+</DIV>
+

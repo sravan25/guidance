@@ -24,8 +24,11 @@ export class OutputCaptureComponent implements OnInit {
 
     this.commService.receiveObject.subscribe((param:Object)=>{
       this.itemObject = {...param}
-      console.log("dfdsf",this.itemObject,new Date().getTime());
-    
+      console.log("receive Object ",this.itemObject,new Date().getTime());
+    });
+
+    this.commService.subObject.subscribe((param: boolean) => {
+      console.log("subject Obect",param,new Date().getTime());
     });
    }
 
