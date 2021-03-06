@@ -1,1 +1,50 @@
-<p>register works!</p>
+<div style="text-align: center">
+    <form [formGroup]="signUpForm" (ngSubmit)="onSubmit()">
+        <div>
+        <input  type="text" id="name"
+        formControlName="name"
+                placeholder="Enter User name"
+        />
+        </div>
+        <div *ngIf="!signUpForm.get('name').valid && signUpForm.get('name').touched" style="color: darkred">
+            Please enter valid username & password
+        </div>
+
+        <div>
+            <input type="email" id="email"
+                formControlName="email"
+                   placeholder="Enter User email"
+            />
+        </div>
+        <div>
+            <input type="password" id="password"
+            formControlName="password"
+                   placeholder="Enter User pasword"
+            />
+        </div>
+        <div>
+            <input type="number" id="age"
+                   formControlName="age"
+                   placeholder="Enter age"
+            />
+        </div>
+        <div>
+            <input type="number" id="weight"
+                   formControlName="weight"
+                   placeholder="weight in Kg"
+            />
+        </div>
+        <div>
+            <input type="number" id="height"
+                   formControlName="height"
+                   placeholder="height is cm"
+            />
+        </div>
+        <div>
+            <button type="submit"> Sign Up</button>
+        </div>
+    </form>
+     <div *ngIf="isInserted === 1" style="color:green;font-size: 1.5rem">
+         We have stored your details.
+     </div>
+</div>

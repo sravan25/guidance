@@ -1,53 +1,64 @@
-<DIV>
+<DIV style="background-color: #96e3e8;height: auto;width: auto">
     <form (ngSubmit)="onSubmit()" #f="ngForm">
       <div
             ngModelGroup="userData"
             #userData="ngModelGroup"
-        >
-            <div>
-                <input type="text"
-                       placeholder="Enter userName"
-                       ngModel
-                       name="userName"
-                       required
-                       userName
-                       #userName="ngModel"
-                />
-            </div>
-            <div *ngIf="!userName.valid && userName.touched"
+      >
+      <div>
+        <input type="text"
+               placeholder="Enter userName"
+               ngModel
+               name="uname"
+               required
+               uname
+               #uname="ngModel"
+
+        /> <br/>
+       <!-- <button type="button" (click)="suggestedValue()">suggested value </button> -->
+       </div>
+            <div *ngIf="!uname.valid && uname.touched"
                  style="text-align: left;font-size:0.8rem;color:red;padding:20px">
                 User Name required
             </div>
             <div>
                 <input type="password"  placeholder="Enter Password"
                        ngModel
-                       name="userPassword" userPassword required/>
+                       name="password" password required/>
             </div>
             <div>
-                <label>
                     <input
                         type="radio"
                         name="gender"
                         ngModel
-                        [value]="gender"/> Male
-                </label>
-                <label>
+                        value="male"/> Male
+            </div>
+           <div>
                     <input
                             type="radio"
                             name="gender"
-                            ngModel [value]="gender"/> Female
-                </label>
+                            ngModel
+                            value="female"
+                    /> Female
+
             </div>
        <div>
+           <div>
+           </div>
          <button type="submit" class="button" value="Login" ngModel >Login</button>
        </div>
-       <div *ngIf="!userData.valid && userData.touched" style="text-align: left;font-size:0.8rem;color:red;padding:20px">
+       <div *ngIf="!userData.valid && userData.touched"
+            style="text-align: left;font-size:0.8rem;color:red;padding:20px">
                 user Data invalid
             </div>
       </div>
     </form>
+    implemented filter/pipe
+    <div style="color:red"> {{ errMsg | uppercase | shorten:5}} </div>
+    <span>{{"2.00" | currency}}</span>
+
+   <!-- *ngFor="let der of ser| filter:filteredStatus:'status'" -->
     <div>
-        <a [routerLink]="['rigister']">Register </a>
+        <a [routerLink]="['/register']">Register </a>
     </div>
 </DIV>
 

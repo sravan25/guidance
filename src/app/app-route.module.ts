@@ -10,7 +10,7 @@ import {LoginComponent} from './login/login.component';
 import  {RegisterComponent} from './register/register.component';
 
 const appRoutes: Routes = [
-    {path: '', component: MainComponent},
+    {path:'', redirectTo: 'login', pathMatch: 'full'},
     {
         path: 'items/:name', component: OutputCaptureComponent,
         // children:[{path:":id",component:"childComponent"}]
@@ -20,7 +20,9 @@ const appRoutes: Routes = [
     {path: 'login', component: LoginComponent},
     {path: 'register', component: RegisterComponent},
     {path: 'error', component: ErrorComponent, data: {message: 'Page Not Found'}},
-    {path: '**', redirectTo: '/error'}
+    {path: '**', redirectTo: '/error'},
+
+    {path: 'main', component: MainComponent},
 ];
   @NgModule({
     imports:[

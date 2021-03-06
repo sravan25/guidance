@@ -1,4 +1,4 @@
-input {
+input[type='text'],[type=password],[type=email],[type=number]{
     height:40px;
     margin:10px;
     border-radius: 4px;

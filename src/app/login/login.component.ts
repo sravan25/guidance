@@ -2,8 +2,10 @@ import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 
 import {interval, Observable, Observer, Subscription} from 'rxjs';
 
-import { map,filter} from 'rxjs/operators';
+import { map, filter} from 'rxjs/operators';
 import {NgForm} from '@angular/forms';
+import {HttpClient} from '@angular/common/http';
+import {UserService} from '../user.service';
 
 @Component({
   selector: 'app-login',
@@ -12,21 +14,24 @@ import {NgForm} from '@angular/forms';
 })
 export class LoginComponent implements OnInit, OnDestroy{
   @ViewChild('f') loginForm: NgForm;
-  userName: string;
+  uname: string;
   password: string;
   gender: string;
   firstObsSubscription: Subscription;
   customeObservable$: Observable<any>;
   private number: any;
+  errMsg: string;
+  constructor(private httpClient: HttpClient, private userService: UserService) {
 
-  constructor() { }
+  }
 
   ngOnInit(): void {
-    //this.firstObsSubscription = interval(1000).subscribe( (value) => {
-     // console.log('count ==', value);
-    //});
 
-    this.customeObservable$ = new Observable((Obs: Observer<any>) =>{
+    // this.firstObsSubscription = interval(1000).subscribe( (value) => {
+     // console.log('count ==', value);
+    // });
+
+    this.customeObservable$ = new Observable((Obs: Observer<any>) => {
      let count = 0;
      setInterval(() => {
        Obs.next(count);
@@ -61,32 +66,48 @@ export class LoginComponent implements OnInit, OnDestroy{
 
     */
 
-    this.firstObsSubscription = this.customeObservable$.pipe(filter((data:number) => {
-      return data >0;
+    this.firstObsSubscription = this.customeObservable$.pipe(filter((data: number) => {
+      return data > 0;
     }), map((data: number) => {
-        return 'Round:' + (data +1);
+        return 'Round:' + (data + 1);
       })
     ).subscribe(data => {
       console.log(data);
-    },error => {
+    }, error => {
       console.log(error);
-    },() => {
+    }, () => {
       console.log('completed');
     });
   }
 
-  ngOnChange():void {
-      console.log("gender :"+this.gender);
+  ngOnChange(): void {
+      console.log('gender :' + this.gender);
+  }
+
+  suggestedValue(): void {
+      this.loginForm.form.patchValue({
+          userData: {
+              name: 'sravan'
+          }
+      });
   }
 
   ngOnDestroy(): void {
     this.firstObsSubscription.unsubscribe();
   }
 
+    // tslint:disable-next-line:typedef
   onSubmit() {
-    console.log("form viewChild",this.loginForm.value.userData);
+      console.log(this.loginForm.value);
+      this.userService.fetchUsers(this.loginForm.value.userData).
+      subscribe((data) => {
+
+        console.log(data);
+        }, error => {
+              console.log("error ==",error.message);
+
+            this.errMsg = "Something went wrong";
+        });
   }
-
-
 
 }

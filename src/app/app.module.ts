@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import {AppRoutingModule} from './app-route.module'
-import { FormsModule } from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
@@ -20,6 +20,9 @@ import { CommunicateService } from './communicate.service';
 import { ErrorComponent } from './error/error.component';
 import { AuthService } from './auth.service';
 import { AuthGuardService } from './auth-guard.service';
+import { HttpClientModule,HTTP_INTERCEPTORS } from '@angular/common/http';
+import {AuthInterceptorService} from './auth-interceptor.service'
+import {CustomPipe} from './custom.pipe';
 
 
 @NgModule({
@@ -37,14 +40,18 @@ import { AuthGuardService } from './auth-guard.service';
     RegisterComponent,
     RouteTutComponent,
     DoubtsComponent,
-    ErrorComponent
+    ErrorComponent,
+    CustomPipe
   ],
   imports: [
     BrowserModule,
     FormsModule,
+    ReactiveFormsModule,
+    HttpClientModule,
     AppRoutingModule
   ],
-  providers: [CommonService,CommunicateService,AuthService,AuthGuardService],
+  providers: [CommonService,CommunicateService,AuthService,AuthGuardService,{provide:HTTP_INTERCEPTORS,
+    useClass: AuthInterceptorService, multi:true}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

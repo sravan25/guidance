@@ -14,7 +14,7 @@
     align-items: left;
 }
 
-input,select {
+input[type="text"],select {
     height:40px;
     margin:10px;
     border-radius: 4px;
